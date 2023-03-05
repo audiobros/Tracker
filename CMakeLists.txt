@@ -8,8 +8,8 @@ set(CMAKE_BINARY_DIR build/bin)
 
 add_executable(tracker main.cpp)
 
-add_subdirectory(../../tracktion_engine/modules/juce ${CMAKE_BINARY_DIR}/tracktion/juce EXCLUDE_FROM_ALL)
-add_subdirectory(../../tracktion_engine/modules ${CMAKE_BINARY_DIR}/tracktion EXCLUDE_FROM_ALL)
+add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/external/tracktion_engine/modules/juce ${CMAKE_BINARY_DIR}/tracktion/juce EXCLUDE_FROM_ALL)
+add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/external/tracktion_engine/modules ${CMAKE_BINARY_DIR}/tracktion EXCLUDE_FROM_ALL)
 
 add_library(tracktion STATIC)
 
