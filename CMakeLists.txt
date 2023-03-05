@@ -6,7 +6,7 @@ project(tracker VERSION 1.0 LANGUAGES CXX)
 # Set Binary Dir in project
 set(CMAKE_BINARY_DIR build/bin)
 
-add_executable(tracker main.cpp)
+add_executable(tracker src/main.cpp)
 
 add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/external/tracktion_engine/modules/juce ${CMAKE_BINARY_DIR}/tracktion/juce EXCLUDE_FROM_ALL)
 add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/external/tracktion_engine/modules ${CMAKE_BINARY_DIR}/tracktion EXCLUDE_FROM_ALL)
