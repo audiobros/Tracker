@@ -1,26 +1,42 @@
-cmake_minimum_required(VERSION 3.25)
+cmake_minimum_required(VERSION 3.23.2)
 
 # Set project name
-project(tracker VERSION 1.0 LANGUAGES CXX)
+project(TRACKER_PROJECT VERSION 1.0 LANGUAGES CXX)
 
-# Set Binary Dir in project
-set(CMAKE_BINARY_DIR build/bin)
+# If we are compiling for macOS we want to target OS versions down to 10.11
+#set (CMAKE_OSX_DEPLOYMENT_TARGET "10.11" CACHE INTERNAL "")
+#set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -Werror")
 
-add_executable(tracker src/main.cpp)
+add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/external/tracktion_engine/modules/juce ${CMAKE_BINARY_DIR}/tracktion/juce)
+add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/external/tracktion_engine/modules ${CMAKE_BINARY_DIR}/tracktion)
 
-add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/external/tracktion_engine/modules/juce ${CMAKE_BINARY_DIR}/tracktion/juce EXCLUDE_FROM_ALL)
-add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/external/tracktion_engine/modules ${CMAKE_BINARY_DIR}/tracktion EXCLUDE_FROM_ALL)
+juce_add_console_app(TrackerBro
+     PRODUCT_NAME "TrackerBro App")
+
+#juce_generate_juce_header(TrackerBro)
+target_sources(TrackerBro
+    PRIVATE
+        src/main.cpp)
 
 add_library(tracktion STATIC)
-
+target_include_directories(tracktion INTERFACE ${CMAKE_CURRENT_LIST_DIR}/external/tracktion_engine/modules)
 target_link_libraries(tracktion 
-  PRIVATE
+        PUBLIC 
         tracktion::tracktion_core
         tracktion::tracktion_engine
         tracktion::tracktion_graph
-  PUBLIC 
-        juce::juce_recommended_config_flags
-        juce::juce_recommended_lto_flags
-        juce::juce_recommended_warning_flags)
+#        juce::juce_recommended_config_flags
+#        juce::juce_recommended_lto_flags
+#        juce::juce_recommended_warning_flags
+        )
 
-target_link_libraries(tracker tracktion)
+target_link_libraries(TrackerBro 
+        PUBLIC
+        tracktion
+)
+
+target_compile_definitions(TrackerBro
+        PRIVATE
+            # JUCE_WEB_BROWSER and JUCE_USE_CURL would be on by default, but you might not need them.
+            JUCE_WEB_BROWSER=0  # If you remove this, add `NEEDS_WEB_BROWSER TRUE` to the `juce_add_console_app` call
+            JUCE_USE_CURL=0)    # If you remove this, add `NEEDS_CURL TRUE` to the `juce_add_console_app` call
