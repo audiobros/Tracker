@@ -14,7 +14,6 @@ set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -Werror")
 
 # Swift related settings
 set(CMAKE_Swift_LANGUAGE_VERSION 5)
-set(SWIFT_OPTIMIZATION_LEVEL "-Onone") # Required for preview feature
                                        # Compile without any optimization
 
 # Adds all the module sources so they appear correctly in the IDE
@@ -29,7 +28,7 @@ add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/external/tracktion_engine/modules ./c
 # Create Tracktion Static Lib #
 ###############################
 add_library(Tracktion STATIC)
-target_include_directories(Tracktion INTERFACE ${CMAKE_CURRENT_LIST_DIR}/external/tracktion_engine/modules
+target_include_directories(Tracktion PUBLIC ${CMAKE_CURRENT_LIST_DIR}/external/tracktion_engine/modules
                                                ${CMAKE_CURRENT_LIST_DIR}/external/tracktion_engine/modules/juce)
 target_link_libraries(Tracktion 
   PRIVATE
