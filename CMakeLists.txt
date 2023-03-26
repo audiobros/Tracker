@@ -1,10 +1,7 @@
 cmake_minimum_required(VERSION 3.25)
 
 # Set project name
-project(tracker VERSION 1.0)
-enable_language("Swift")
-enable_language("OBJC")
-enable_language("CXX")
+project(tracker VERSION 1.0 LANGUAGES Swift OBJC CXX)
 
 if(IOS)
   set(CMAKE_OSX_DEPLOYMENT_TARGET "15.0" CACHE INTERNAL "")
