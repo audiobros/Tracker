@@ -14,7 +14,6 @@ set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -Werror")
 
 # Swift related settings
 set(CMAKE_Swift_LANGUAGE_VERSION 5)
-                                       # Compile without any optimization
 
 # Adds all the module sources so they appear correctly in the IDE
 set_property(GLOBAL PROPERTY USE_FOLDERS YES)
@@ -28,8 +27,8 @@ add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/external/tracktion_engine/modules ./c
 # Create Tracktion Static Lib #
 ###############################
 add_library(Tracktion STATIC)
-target_include_directories(Tracktion PUBLIC ${CMAKE_CURRENT_LIST_DIR}/external/tracktion_engine/modules
-                                               ${CMAKE_CURRENT_LIST_DIR}/external/tracktion_engine/modules/juce)
+target_include_directories(Tracktion PRIVATE ${CMAKE_CURRENT_LIST_DIR}/external/tracktion_engine/modules
+                                            ${CMAKE_CURRENT_LIST_DIR}/external/tracktion_engine/modules/juce)
 target_link_libraries(Tracktion 
   PRIVATE
         tracktion::tracktion_core
@@ -57,6 +56,8 @@ target_link_libraries(tracker PRIVATE Tracktion)
 set_target_properties(tracker PROPERTIES
   XCODE_ATTRIBUTE_SWIFT_OBJC_BRIDGING_HEADER "${PROJECT_SOURCE_DIR}/src/tracker-Bridging-Header.h"
   XCODE_ATTRIBUTE_SWIFT_OPTIMIZATION_LEVEL "-Onone"
+  XCODE_ATTRIBUTE_TARGETED_DEVICE_FAMILY "1,2"
+  # XCODE_ATTIRBUTE_INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad "Yes"
   MACOSX_BUNDLE_BUNDLE_NAME "Tracker"
   MACOSX_BUNDLE_BUNDLE_VERSION "1.0.0"
   MACOSX_BUNDLE_GUI_IDENTIFIER "TrackerBro"
