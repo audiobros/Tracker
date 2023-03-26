@@ -57,6 +57,7 @@ target_link_libraries(tracker PRIVATE Tracktion)
 
 set_target_properties(tracker PROPERTIES
   XCODE_ATTRIBUTE_SWIFT_OBJC_BRIDGING_HEADER "${PROJECT_SOURCE_DIR}/src/tracker-Bridging-Header.h"
+  XCODE_ATTRIBUTE_SWIFT_OPTIMIZATION_LEVEL "-Onone"
   MACOSX_BUNDLE_BUNDLE_NAME "Tracker"
   MACOSX_BUNDLE_BUNDLE_VERSION "1.0.0"
   MACOSX_BUNDLE_GUI_IDENTIFIER "TrackerBro"
