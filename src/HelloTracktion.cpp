@@ -7,17 +7,40 @@
 
 #include "HelloTracktion.h"
 
-std::string HelloTracktion::sayHello() {
-    std::unique_ptr<juce::ScopedJuceInitialiser_GUI> initializer = std::make_unique<juce::ScopedJuceInitialiser_GUI>();
-    std::unique_ptr<tracktion::Engine> engine = std::make_unique<tracktion::Engine>("TrackerBro");
-    std::unique_ptr<tracktion::Edit> edit;
+#include "PlaybackDemoAudio.h"
 
-    const auto editFilePath = juce::JUCEApplication::getCommandLineParameters().replace ("-NSDocumentRevisionsDebugMode YES", "").unquoted().trim();
-    const juce::File editFile (editFilePath);
+HelloTracktion::HelloTracktion() { }
+HelloTracktion::~HelloTracktion() {
+    mEngine->getTemporaryFileManager().getTempDirectory().deleteRecursively();
+}
 
-    auto f = juce::File::createTempFile (".ogg");
+void HelloTracktion::initializeEngine() {
+    mEngine = std::make_unique<tracktion::Engine>("Tracker");
 
-    std::cout << "Here!, congrats!" << std::endl;
+    auto editFile = juce::File::createTempFile(".tracker");
+    mEdit = tracktion::createEmptyEdit(*mEngine, editFile);
+}
+
+tracktion::WaveAudioClip::Ptr HelloTracktion::loadTestClip() {
+    // Create test file
+    auto f = juce::File::createTempFile(".ogg");
+    f.replaceWithData(PlaybackDemoAudio::BITs_Export_2_ogg, PlaybackDemoAudio::BITs_Export_2_oggSize);
     
+    return loadAudioFileAsClip(*mEdit, f);
+}
+
+void HelloTracktion::loopSampleAudio() {
+    const auto clip = loadTestClip();
+    
+    // loop the test audio
+    auto& transport = clip->edit.getTransport();
+    transport.setLoopRange (clip->getEditTimeRange());
+    transport.looping = true;
+
+    transport.stop(false, false);
+    transport.play(false);
+}
+
+std::string HelloTracktion::sayHello() {
     return "Hello from Tracktion world!";
 }

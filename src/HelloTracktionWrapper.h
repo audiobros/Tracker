@@ -10,7 +10,9 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface HelloTracktionWrapper : NSObject
+- (id)init;
 - (NSString *) sayHello;
+- (void) loopTestClip;
 @end
 
 NS_ASSUME_NONNULL_END

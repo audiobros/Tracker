@@ -28,7 +28,7 @@ add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/external/tracktion_engine/modules ./c
 ###############################
 add_library(Tracktion STATIC)
 target_include_directories(Tracktion PRIVATE ${CMAKE_CURRENT_LIST_DIR}/external/tracktion_engine/modules
-                                            ${CMAKE_CURRENT_LIST_DIR}/external/tracktion_engine/modules/juce)
+                                             ${CMAKE_CURRENT_LIST_DIR}/external/tracktion_engine/modules/juce)
 target_link_libraries(Tracktion 
   PRIVATE
         tracktion::tracktion_core
@@ -44,11 +44,14 @@ set(SourceFiles
         src/HelloTracktion.h
         src/HelloTracktionWrapper.h
         src/HelloTracktionWrapper.mm
+        src/PlaybackDemoAudio.h
         src/tracker-Bridging-Header.h
         src/ContentView.swift
-        src/trackerUI.swift)
+        src/trackerUI.swift
+)
+
 target_sources(tracker PRIVATE ${SourceFiles})
-source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR}/.. FILES ${SourceFiles})
+source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES ${SourceFiles})
 target_include_directories(tracker PRIVATE ${CMAKE_CURRENT_LIST_DIR}/external/tracktion_engine/modules)
 target_include_directories(tracker PRIVATE ${CMAKE_CURRENT_LIST_DIR}/external/tracktion_engine/modules/juce/modules)
 target_link_libraries(tracker PRIVATE Tracktion)
@@ -57,6 +60,7 @@ set_target_properties(tracker PROPERTIES
   XCODE_ATTRIBUTE_SWIFT_OBJC_BRIDGING_HEADER "${PROJECT_SOURCE_DIR}/src/tracker-Bridging-Header.h"
   XCODE_ATTRIBUTE_SWIFT_OPTIMIZATION_LEVEL "-Onone"
   XCODE_ATTRIBUTE_TARGETED_DEVICE_FAMILY "1,2"
+  MACOSX_BUNDLE TRUE
   MACOSX_BUNDLE_BUNDLE_NAME "Tracker"
   MACOSX_BUNDLE_BUNDLE_VERSION "1.0.0"
   MACOSX_BUNDLE_GUI_IDENTIFIER "TrackerBro"

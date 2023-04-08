@@ -7,6 +7,8 @@
 
 import SwiftUI
 
+var helloTracker = HelloTracktionWrapper()
+
 @main
 struct trackerUITestApp: App {
     var body: some Scene {
