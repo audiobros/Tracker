@@ -22,6 +22,7 @@ option(JUCE_BUILD_EXTRAS "Build JUCE Examples" OFF)
 option(JUCE_BUILD_EXAMPLES "Build JUCE Extras" OFF)
 add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/external/tracktion_engine/modules/juce)
 add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/external/tracktion_engine/modules ./cmake_build_tracktion)
+add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/external/Catch2 ./cmake_build_catch2)
 
 ###############################
 # Create Tracktion Static Lib #
@@ -71,3 +72,4 @@ target_compile_definitions(tracker
         JUCE_WEB_BROWSER=0  # If you remove this, add `NEEDS_WEB_BROWSER TRUE` to the `juce_add_console_app` call
         JUCE_USE_CURL=0     # If you remove this, add `NEEDS_CURL TRUE` to the `juce_add_console_app` call
         JUCE_GLOBAL_MODULE_SETTINGS_INCLUDED=1)  # We don't need a global header
+

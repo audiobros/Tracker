@@ -1,3 +1,6 @@
 [submodule "external/tracktion_engine"]
 	path = external/tracktion_engine
 	url = https://github.com/Tracktion/tracktion_engine.git
+[submodule "external/Catch2"]
+	path = external/Catch2
+	url = https://github.com/catchorg/Catch2.git
