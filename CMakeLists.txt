@@ -41,6 +41,12 @@ target_link_libraries(Tracktion
 #########################
 juce_add_console_app(tracker MACOSX_BUNDLE)
 set(SourceFiles       
+        src/Player/Player.cpp
+        src/Player/Player.h
+        src/Player/Ticker.cpp
+        src/Player/Ticker.h
+        src/Player/Pattern.cpp
+        src/Player/Pattern.h
         src/HelloTracktion.cpp
         src/HelloTracktion.h
         src/HelloTracktionWrapper.h
@@ -48,6 +54,7 @@ set(SourceFiles
         src/tracker-Bridging-Header.h
         src/ContentView.swift
         src/trackerUI.swift)
+        
 target_sources(tracker PRIVATE ${SourceFiles})
 source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR}/.. FILES ${SourceFiles})
 target_include_directories(tracker PRIVATE ${CMAKE_CURRENT_LIST_DIR}/external/tracktion_engine/modules)
