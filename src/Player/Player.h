@@ -1,42 +1,35 @@
 /// Player.cpp
 
-#include "Player.h"
+#include "Ticker.h"
+#include "Pattern.h"
+#include <vector>
 
-Player::Player() : mTicker(Ticker(TICKSPEED))
-{
-    mTicker.addListener(*this);
-}
 
-Player::~Player()
-{
-    mTicker.removeListener(*this);
-}
+#define TICKSPEED 10000
 
-void Player::processBuffer(int samples)
-{
-    for (int i = 0; i < samples; i++)
-        mTicker.processSample();
-}
-
-void Player::progressRow(int samples)
-{
-    std::cout << "Starting next row..." << std::endl;
-}
-
-void Player::processTick()
-{
-    if (mTicksPerLine == mTickCount) {
-        mTickCount = 0;
-    }
-    progressRow();
-}
-
-void Player::setTicksPerLine(int ticksPerLine)
-{
-    mTicksPerLine = ticksPerLine;
-}
-
-void Player::getTicksPerLine(int ticksPerLine)
-{
-    return mTicksPerLine;
-}
+class Player : public Ticker::Listener {
+public:
+    Player();
+    ~Player();
+    
+    //==============================================================================
+    void processBuffer(int samples);
+    void progressRow();
+    
+    // Ticker::Listener Overrides
+    void handleTick() override;
+    
+    //==============================================================================
+    void setTicksPerLine(int ticksPerLine);
+    void getTicksPerLine(int ticksPerLine);
+    
+    //==============================================================================
+    void insertPattern(Pattern& pattern);
+    
+private:
+    std::vector<Pattern> mPatterns;
+    
+    Ticker mTicker;
+    int mTickCount;
+    int mTicksPerLine;
+};

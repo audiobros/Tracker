@@ -1,6 +1,7 @@
 ///Ticker.cpp
 
 #include "Ticker.h"
+#include <algorithm>
 
 Ticker::Ticker(int tickSpeed) : mTickSpeed(tickSpeed)
 {
@@ -12,7 +13,7 @@ void Ticker::processSample()
 {
     mNumSamples++;
     if (++mNumSamples == mTickSpeed) {
-        std::for_each(mListeners.begin(), mListeners.end(), [](auto listener) { listener.handleTick(); });
+        std::for_each(mListeners.begin(), mListeners.end(), [](auto& listener) { listener.handleTick(); });
         mNumSamples = 0;
     }
 }

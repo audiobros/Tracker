@@ -1,13 +1,22 @@
 //
-//  Pattern.hpp
+//  Pattern.h
 //  Tracktion
 //
 //  Created by Brian Arne on 6/2/23.
 //
 
-#ifndef Pattern_hpp
-#define Pattern_hpp
+#pragma once
+#include <vector>
+#include "ChannelData.h"
 
-#include <stdio.h>
-
-#endif /* Pattern_hpp */
+    
+class Pattern {
+public:
+    Pattern();
+    ~Pattern();
+    
+    
+private:
+    std::vector<ChannelData> mRow;
+    int currentRow;
+};

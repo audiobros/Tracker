@@ -6,10 +6,13 @@ class Ticker {
     
 public:
     class Listener {
-        virtual void processTick() {};
+    public:
+        Listener() {};
+        virtual ~Listener() {};
+        virtual void handleTick() = 0;
     };
+   
     //==============================================================================
-    
     Ticker(int tickSpeed);
     
     void processSample();

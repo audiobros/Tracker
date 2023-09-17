@@ -47,6 +47,7 @@ set(SourceFiles
         src/Player/Ticker.h
         src/Player/Pattern.cpp
         src/Player/Pattern.h
+        src/Player/ChannelData.h
         src/HelloTracktion.cpp
         src/HelloTracktion.h
         src/HelloTracktionWrapper.h
