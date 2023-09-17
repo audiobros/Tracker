@@ -13,7 +13,7 @@ void Ticker::processSample()
 {
     mNumSamples++;
     if (++mNumSamples == mTickSpeed) {
-        std::for_each(mListeners.begin(), mListeners.end(), [](auto& listener) { listener.handleTick(); });
+        std::for_each(mListeners.begin(), mListeners.end(), [](auto& listener) { listener->handleTick(); });
         mNumSamples = 0;
     }
 }
@@ -29,12 +29,12 @@ int Ticker::getTickSpeed()
 }
 
 //==============================================================================
-void Ticker::addListener(const Listener& listener)
+void Ticker::addListener(Ticker::Listener* listener)
 {
     mListeners.push_back(listener);
 }
 
-void Ticker::removeListener(const Listener& listener)
+void Ticker::removeListener(Ticker::Listener* listener)
 {
     auto itr = std::find(mListeners.begin(), mListeners.end(), listener);
     

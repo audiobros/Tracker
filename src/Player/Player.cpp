@@ -5,13 +5,13 @@
 
 Player::Player() : mTicker(Ticker(TICKSPEED))
 {
-    mTicker.addListener(*this);
+//    mTicker.addListener(*this);
     mPatterns.push_back(Pattern());
 }
 
 Player::~Player()
 {
-    mTicker.removeListener(*this);
+//    mTicker.removeListener(*this);
 }
 
 //==============================================================================
@@ -26,13 +26,13 @@ void Player::progressRow()
     std::cout << "Starting next row..." << std::endl;
 }
 
-void Player::handleTick()
-{
-    if (mTicksPerLine == mTickCount) {
-        mTickCount = 0;
-    }
-    progressRow();
-}
+//void Player::handleTick()
+//{
+//    if (mTicksPerLine == mTickCount) {
+//        mTickCount = 0;
+//    }
+//    progressRow();
+//}
 
 //==============================================================================
 void Player::setTicksPerLine(int ticksPerLine)

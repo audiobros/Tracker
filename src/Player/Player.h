@@ -7,7 +7,7 @@
 
 #define TICKSPEED 10000
 
-class Player : public Ticker::Listener {
+class Player {
 public:
     Player();
     ~Player();
@@ -17,7 +17,7 @@ public:
     void progressRow();
     
     // Ticker::Listener Overrides
-    void handleTick() override;
+//    void handleTick() override;
     
     //==============================================================================
     void setTicksPerLine(int ticksPerLine);

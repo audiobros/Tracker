@@ -21,11 +21,11 @@ public:
     int getTickSpeed();
    
     //==============================================================================
-    void addListener(const Listener& listener);
-    void removeListener(const Listener& listener);
+    void addListener(Listener* listener);
+    void removeListener(Listener* listener);
     
 private:
-    std::vector<Listener> mListeners;
+    std::vector<Ticker::Listener*> mListeners;
     
     int mNumSamples;
     int mTickSpeed;
