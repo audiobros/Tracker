@@ -5,28 +5,27 @@
 class Ticker {
     
 public:
-    class Listener {
-    public:
-        Listener() {};
-        virtual ~Listener() {};
-        virtual void handleTick() = 0;
-    };
+    //==============================================================================
+    Ticker(int samplesPerTick);
    
     //==============================================================================
-    Ticker(int tickSpeed);
-    
     void processSample();
-    
-    void setTickSpeed(int tickSpeed);
-    int getTickSpeed();
    
     //==============================================================================
-    void addListener(Listener* listener);
-    void removeListener(Listener* listener);
+    void setTickSpeed(int samplesPerTick);
+    int getTickSpeed();
+    int getCurrentTick();
     
+    //==============================================================================
+    void setTicksPerRow(int ticksPerRow);
+    int getTicksPerRow();
+    int getCurrentRow();
+   
 private:
-    std::vector<Ticker::Listener*> mListeners;
+    int mSamplesPerTick;
+    int mTicksPerRow;
     
-    int mNumSamples;
-    int mTickSpeed;
+    int mSampleAccumulator;
+    int mCurrentTick;
+    int mCurrentRow;
 };

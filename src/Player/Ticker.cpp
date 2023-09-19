@@ -1,43 +1,58 @@
-///Ticker.cpp
+/// Ticker.cpp
 
 #include "Ticker.h"
 #include <algorithm>
 
-Ticker::Ticker(int tickSpeed) : mTickSpeed(tickSpeed)
+Ticker::Ticker(int samplesPerTick) : mSamplesPerTick(samplesPerTick),
+    mTicksPerRow(0),
+    mSampleAccumulator(0),
+    mCurrentTick(0),
+    mCurrentRow(0)
 {
-    
 }
 
 //==============================================================================
 void Ticker::processSample()
 {
-    mNumSamples++;
-    if (++mNumSamples == mTickSpeed) {
-        std::for_each(mListeners.begin(), mListeners.end(), [](auto& listener) { listener->handleTick(); });
-        mNumSamples = 0;
+    mSampleAccumulator++;
+    if (mSampleAccumulator == mSamplesPerTick)
+    {
+        if (++mCurrentTick == mTicksPerRow) {
+            mCurrentRow++;
+            mCurrentTick = 0;
+        }
+        mSampleAccumulator = 0;
     }
 }
 
-void Ticker::setTickSpeed(int tickSpeed)
+//==============================================================================
+void Ticker::setTickSpeed(int samplesPerTick)
 {
-    mTickSpeed = tickSpeed;
+    mSamplesPerTick = samplesPerTick;
 }
 
 int Ticker::getTickSpeed()
 {
-    return mTickSpeed;
+    return mSamplesPerTick;
+}
+
+int Ticker::getCurrentTick()
+{
+    return mCurrentTick;
 }
 
 //==============================================================================
-void Ticker::addListener(Ticker::Listener* listener)
+void Ticker::setTicksPerRow(int ticksPerRow)
 {
-    mListeners.push_back(listener);
+    mTicksPerRow = ticksPerRow;
 }
 
-void Ticker::removeListener(Ticker::Listener* listener)
+int Ticker::getTicksPerRow()
 {
-    auto itr = std::find(mListeners.begin(), mListeners.end(), listener);
-    
-    if (itr != mListeners.end())
-        mListeners.erase(itr);
+    return mTicksPerRow;
+}
+
+int Ticker::getCurrentRow()
+{
+    return mCurrentRow;
 }

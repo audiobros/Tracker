@@ -11,8 +11,12 @@ set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -Werror")
 ##########
 add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/external/Catch2 ./cmake_build_catch2)
 set(SourceFiles
-    src/test/SetupTest.cpp
-    src/test/ProcessorTest.cpp)
+    src/test/PlayerTest.cpp
+    src/test/TickerTest.cpp
+    src/Player/Player.cpp
+    src/Player/Player.h
+    src/Player/Ticker.cpp
+    src/Player/Ticker.h)
 
 # These tests can use the Catch2-provided main
 add_executable(tests ${SourceFiles})
