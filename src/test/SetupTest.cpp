@@ -5,6 +5,9 @@ unsigned int Factorial( unsigned int number ) {
     return number > 1 ? Factorial(number-1)*number : 1;
 }
 
+// TEST_CASE( "Free Form Test Name", "[Tags]")
+// SECTION ("Section Name", "Description");
+
 TEST_CASE( "Factorials are computed", "[factorial]" ) {
     REQUIRE( Factorial(0) == 1 );
     REQUIRE( Factorial(1) == 1 );
