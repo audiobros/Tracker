@@ -1,7 +1,7 @@
 /// PlayerTest.cpp
 
 #include <catch2/catch_test_macros.hpp>
-#include "../../src/Player/Player.h"
+#include <Player/Player.h>
 
 TEST_CASE("Make Player", "[player]" )
 {

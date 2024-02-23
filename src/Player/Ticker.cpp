@@ -1,6 +1,6 @@
 /// Ticker.cpp
 
-#include "Ticker.h"
+#include <Player/Ticker.h>
 #include <algorithm>
 
 Ticker::Ticker(int samplesPerTick) : mSamplesPerTick(samplesPerTick),

@@ -1,8 +1,7 @@
 /// TickerTest.cpp
 
 #include <catch2/catch_test_macros.hpp>
-
-#include "../../src/Player/Ticker.h"
+#include <Player/Ticker.h>
 
 TEST_CASE("Create Ticker", "[Ticker]")
 {

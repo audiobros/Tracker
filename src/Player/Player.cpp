@@ -1,6 +1,6 @@
 /// Player.cpp
 
-#include "Player.h"
+#include <Player/Player.h>
 #include <iostream>
 
 Player::Player()

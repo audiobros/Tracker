@@ -7,7 +7,7 @@
 
 #pragma once
 #include <vector>
-#include "ChannelData.h"
+#include <Player/ChannelData.h>
 
     
 class Pattern {

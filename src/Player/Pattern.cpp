@@ -5,7 +5,7 @@
 //  Created by Brian Arne on 6/2/23.
 //
 
-#include "Pattern.h"
+#include <Player/Pattern.h>
 
 
 Pattern::Pattern()
